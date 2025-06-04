@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IronCore X Gym</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #0f0f0f;
+        color: #fff;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 10%;
+        background: #000;
+        animation: fadeIn 1s ease forwards;
+        position: relative;
+      }
+      .navbar h1 {
+        color: #ff4d00;
+        font-size: 28px;
+      }
+      .navbar ul {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+      .navbar ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      .navbar ul li a:hover,
+      .navbar ul li a.active {
+        color: #ff4d00;
+      }
+      .menu-toggle {
+        display: none;
+        font-size: 28px;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .hero {
+        background: url("https://i.pinimg.com/736x/d9/6e/56/d96e56b9b063428c279167e1ada29a5f.jpg")
+          no-repeat center center/cover;
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 20px;
+        animation: fadeInUp 1.2s ease forwards;
+        position: relative;
+        z-index: 1;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+      }
+      .hero h2 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 30px;
+      }
+      .hero .btn {
+        background: #ff4d00;
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .hero .btn:hover {
+        background: #e63b00;
+      }
+
+      .stats,
+      .why-us,
+      .difference,
+      .gallery,
+      .pricing,
+      .testimonials,
+      .diagonal-gallery {
+        padding: 60px 10%;
+      }
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        background: #111;
+        text-align: center;
+      }
+      .stats div {
+        font-size: 24px;
+      }
+      .stats div span {
+        display: block;
+        font-size: 14px;
+        color: #bbb;
+      }
+
+      .features,
+      .cards,
+      .plans {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .features div,
+      .card,
+      .plan,
+      .testimonial {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+      }
+      .card:hover {
+        background: #ff4d00;
+      }
+      .plan.featured {
+        border: 2px solid #ff4d00;
+      }
+      .testimonial {
+        margin: 20px auto;
+        max-width: 500px;
+      }
+      .testimonial p {
+        font-style: italic;
+        color: #ddd;
+      }
+      .testimonial h4 {
+        color: #ff4d00;
+      }
+
+      .gallery-images,
+      .diagonal-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        justify-items: center;
+      }
+      .gallery-images img,
+      .diagonal-grid img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s;
+      }
+      .diagonal-grid img:hover,
+      .gallery-images img:hover {
+        transform: scale(1.05);
+      }
+
+      footer {
+        background: #000;
+        padding: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #888;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
+        .navbar ul {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          right: 10%;
+          background: #000;
+          padding: 20px;
+          border-radius: 10px;
+        }
+        .navbar ul.show {
+          display: flex;
+        }
+        .stats,
+        .features,
+        .cards,
+        .plans {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <h1>IronCore X</h1>
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="hero">
+      <h2>Build Strength. Burn Fat. Be Unstoppable.</h2>
+      <p>
+        Join the most intense training community with world-class coaches and
+        cutting-edge equipment.
+      </p>
+      <a href="#programs" class="btn">Explore Programs</a>
+    </section>
+    <section class="stats" data-aos="fade-up">
+      <div>120+ <span>Pro Trainers</span></div>
+      <div>1500+ <span>Members</span></div>
+      <div>50+ <span>Programs</span></div>
+    </section>
+    <section class="why-us" id="programs" data-aos="fade-up">
+      <h2>Why IronCore?</h2>
+      <div class="features">
+        <div>
+          <img
+            src="https://i.pinimg.com/736x/9e/27/45/9e2745f371406a4aef0f4be2d3621343.jpg"
+            width="250"
+            border-radius="20px"
+            alt="Equipment"
+          />
+          <h3>Elite Equipment</h3>
+          <p>Train with top-tier, smart gym tech built for results.</p>
+        </div>
+        <div>
+          <img
+            src="https://i.pinimg.com/736x/cc/10/2a/cc102a8935d60ba5f089d617fe71c102.jpg"
+            width="250px"
+            alt="Trainers"
+          />
+          <h3>Expert Coaches</h3>
+          <p>Certified trainers who push you to greatness.</p>
+        </div>
+        <div>
+          <img
+            src="https://i.pinimg.com/736x/92/d9/9a/92d99a57a6f4e4ff18ebcc67f548ea13.jpg"
+            width="250px"
+            alt="Community"
+          />
+          <h3>Strong Community</h3>
+          <p>Train hard with others who want to win like you do.</p>
+        </div>
+      </div>
+    </section>
+    <section class="difference" data-aos="fade-up">
+      <h2>What Sets Us Apart</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Custom Training</h3>
+          <p>Programs tailored to your fitness goals.</p>
+        </div>
+        <div class="card">
+          <h3>Nutrition Guidance</h3>
+          <p>Personal meal plans to maximize results.</p>
+        </div>
+        <div class="card">
+          <h3>Recovery Zone</h3>
+          <p>On-site wellness & recovery area with therapy.</p>
+        </div>
+      </div>
+    </section>
+    <section class="gallery" data-aos="fade-up">
+      <h2>Gallery</h2>
+      <div class="gallery-images">
+        <img
+          src="https://i.pinimg.com/736x/64/b9/99/64b9994546f3b10183af9f8ddabb84bb.jpg"
+          alt=""
+        />
+        <img
+          src="https://i.pinimg.com/736x/b7/1e/3e/b71e3e86ee2c8b3bf6c9b96cfe8e76aa.jpg"
+          alt=""
+        />
+        <img
+          src="https://i.pinimg.com/736x/40/f7/2c/40f72c5115fe709c93efb329875727a1.jpg"
+          alt=""
+        />
+        <img
+          src="https://i.pinimg.com/736x/82/9c/b8/829cb811fc654d9320db996396a9b791.jpg"
+          alt=""
+        />
+      </div>
+    </section>
+    <section class="pricing" id="pricing" data-aos="fade-up">
+      <h2>Membership Plans</h2>
+      <div class="plans">
+        <div class="plan">
+          <h3>Standard</h3>
+          <p>$39/month</p>
+          <ul>
+            <li>Gym Access</li>
+            <li>Group Classes</li>
+            <li>Fitness Tracker</li>
+          </ul>
+        </div>
+        <div class="plan featured">
+          <h3>Elite</h3>
+          <p>$79/month</p>
+          <ul>
+            <li>Personal Training</li>
+            <li>Diet Plan</li>
+            <li>24/7 Access</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="testimonials" data-aos="fade-up">
+      <h2>Real Results</h2>
+      <div class="testimonial">
+        <p>
+          "IronCore changed my life. I lost 30 pounds and gained confidence I
+          never had before!"
+        </p>
+        <h4>- Alex M.</h4>
+      </div>
+      <div class="testimonial">
+        <p>
+          "The trainers here actually care. They pushed me beyond what I thought
+          was possible."
+        </p>
+        <h4>- Tanya K.</h4>
+      </div>
+    </section>
+    <section class="diagonal-gallery" data-aos="fade-up">
+      <h2>Explore Our Vibes</h2>
+      <div class="diagonal-grid">
+        <img
+          src="https://i.pinimg.com/736x/fb/75/01/fb75011a80f419d1df03bbb00b44d66c.jpg"
+          alt="Gym Image 1"
+        />
+        <img
+          src="https://i.pinimg.com/736x/b0/1f/c1/b01fc1cd1202eb24481f1a50d2a7c9a6.jpg"
+          alt="Gym Image 2"
+        />
+        <img
+          src="https://i.pinimg.com/736x/b9/2e/19/b92e191860d7a0ef72dc07d321fff5c1.jpg"
+          alt="Gym Image 3"
+        />
+      </div>
+    </section>
+    <footer id="contact">
+      <p>&copy; 2025 IronCore Gym | Follow us on Instagram, Facebook, TikTok</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+      AOS.init();
+      VanillaTilt.init(
+        document.querySelectorAll(".card, .features div, .gallery-images img"),
+        {
+          max: 15,
+          speed: 400,
+        }
+      );
+
+      const toggle = document.getElementById("menu-toggle");
+      const navList = document.querySelector(".navbar ul");
+      toggle.addEventListener("click", () => {
+        navList.classList.toggle("show");
+      });
+
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll(".navbar ul li a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (scrollY >= sectionTop - 100) {
+            current = section.getAttribute("id");
+          }
+        });
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").includes(current)) {
+            link.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
